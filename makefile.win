@@ -1,0 +1,34 @@
+# Project: 项目3
+# Makefile created by Red Panda C++ 1.2
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+RES      = 项目3_private.res
+OBJ      = install.o $(RES)
+LINKOBJ  = install.o $(RES)
+CLEANOBJ  =  install.o 项目3_private.res 项目3.exe
+LIBS     =  -s C:/TDM-GCC-64/x86_64-w64-mingw32/lib/liburlmon.a -static
+INCS     =  
+CXXINCS  =  
+BIN      = 项目3.exe
+CXXFLAGS = $(CXXINCS)  -O2 -pipe
+CFLAGS   = $(INCS)  -O2 -pipe
+RM       = del /q /f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(CLEANOBJ) > NUL 2>&1
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+install.o: install.cpp
+	$(CPP) -c C:/Users/Lenovo/Documents/projects/项目3/install.cpp -o install.o $(CXXFLAGS)  -finput-charset=UTF-8 -fexec-charset=gbk
+
+项目3_private.res: 项目3_private.rc 
+	$(WINDRES) -i 项目3_private.rc --input-format=rc -o 项目3_private.res -O coff 
+
